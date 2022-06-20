@@ -84,6 +84,7 @@ export default {
 .item > * {
   border-radius: 10px;
 }
+
 .header {
   background-color: var(--work);
   display: flex;
@@ -105,6 +106,10 @@ export default {
   flex-direction: column;
 }
 
+.body:hover {
+  cursor: pointer;
+  background-color: hsl(231, 45%, 25%);
+}
 .body-controller {
   display: flex;
   justify-content: space-between;
@@ -134,5 +139,19 @@ export default {
   font-size: 54px;
   font-weight: 300;
   letter-spacing: 0px;
+}
+
+@media screen and (max-width: 1050px) {
+  .body-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    text-align: start;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .time {
+    font-size: 42px;
+  }
 }
 </style>

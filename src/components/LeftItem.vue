@@ -2,27 +2,17 @@
   <div class="left-item">
     <div class="upper-card">
       <img src="../assets/image-jeremy.png" alt="avatar" class="avatar" />
-      <div class="report-for">Report for</div>
-      <div class="user-name">Jeremy Robson</div>
+      <div>
+        <div class="report-for">Report for</div>
+        <div class="user-name">Jeremy Robson</div>
+      </div>
     </div>
     <div class="lower-card">
-      <div id="daily" class="option" :class="day" @click="toggleOption('day')">
-        Daily
-      </div>
-      <div
-        id="weekly"
-        class="option"
-        :class="week"
-        @click="toggleOption('week')"
-      >
+      <div class="option" :class="day" @click="toggleOption('day')">Daily</div>
+      <div class="option" :class="week" @click="toggleOption('week')">
         Weekly
       </div>
-      <div
-        id="monthly"
-        class="option"
-        :class="month"
-        @click="toggleOption('month')"
-      >
+      <div class="option" :class="month" @click="toggleOption('month')">
         Monthly
       </div>
     </div>
@@ -120,8 +110,44 @@ export default {
 
 .option {
   color: var(--PaleBlue);
+  cursor: pointer;
 }
-.option + .active {
+.option:hover {
   color: white;
+}
+.active {
+  color: white;
+}
+
+@media screen and (max-width: 1050px) {
+  .upper-card {
+    background-color: var(--Blue);
+    height: 68.5%;
+    display: flex;
+    flex-direction: row;
+    text-align: start;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .lower-card {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    text-align: start;
+    justify-content: space-evenly;
+    margin: 30px 0px;
+  }
+  .report-for {
+    margin-top: 0px;
+    color: var(--PaleBlue);
+  }
+
+  .user-name {
+    font-size: 22px;
+    font-weight: 300;
+    margin-top: 2px;
+  }
 }
 </style>

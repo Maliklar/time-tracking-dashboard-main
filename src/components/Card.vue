@@ -47,4 +47,12 @@ export default {
 .test-item:first-child {
   grid-row: 1 / -1;
 }
+
+@media screen and (max-width: 1050px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    margin: 10% 5%;
+  }
+}
 </style>
