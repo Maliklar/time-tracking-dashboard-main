@@ -1,5 +1,7 @@
 module.exports = {
-  presets: [
-    '@vue/cli-plugin-babel/preset'
-  ]
+    publicPath: "time-tracking-dashboard-main",
+
+    presets: [
+        '@vue/cli-plugin-babel/preset'
+    ]
 }
