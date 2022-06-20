@@ -1,12 +1,9 @@
 <template>
   <div class="card">
-    <LeftItem />
-    <Items :image="'icon-work.svg'" />
-    <Items :image="'icon-work.svg'" />
-    <Items :image="'icon-work.svg'" />
-    <Items :image="'icon-work.svg'" />
-    <Items :image="'icon-work.svg'" />
-    <Items :image="'icon-work.svg'" />
+    <LeftItem @timeframe="timeframe" />
+    <template v-for="object in data" :key="object">
+      <Items :object="object" :timeframe="time" />
+    </template>
   </div>
 </template>
 
@@ -14,6 +11,19 @@
 import Items from "./Items.vue";
 import LeftItem from "./LeftItem.vue";
 export default {
+  props: {
+    data: Object,
+  },
+  data() {
+    return {
+      time: "week",
+    };
+  },
+  methods: {
+    timeframe(val) {
+      this.time = val;
+    },
+  },
   components: { Items, LeftItem },
 };
 </script>

@@ -1,16 +1,16 @@
 <template>
   <div class="item">
-    <div class="header">
+    <div class="header" :style="{ backgroundColor: this.background }">
       <img :src="require('../assets/' + image)" alt="" />
     </div>
     <div class="body">
       <div class="body-controller">
-        <div>Work</div>
+        <div>{{ this.object.title }}</div>
         <img src="../assets/icon-ellipsis.svg" alt="" />
       </div>
       <div class="body-content">
-        <div class="time">32hrs</div>
-        <div class="description">Last Week - 36hrs</div>
+        <div class="time">{{ current }}hrs</div>
+        <div class="description">Last Week - {{ previous }}hrs</div>
       </div>
     </div>
   </div>
@@ -19,11 +19,53 @@
 <script>
 export default {
   props: {
-    image: String,
+    object: Object,
+    timeframe: String,
+  },
+  data() {
+    return {
+      image: "icon-work.svg",
+      background: "play",
+      current: "",
+      previous: "",
+    };
   },
 
-  created() {
-    console.log(this.image);
+  async created() {
+    this.image = "icon-" + this.parse(this.object.title) + ".svg";
+    this.background = "var(--" + this.getBackground(this.object.title) + ")";
+    this.current = this.object.timeframes.weekly.current;
+    this.previous = this.object.timeframes.weekly.previous;
+  },
+
+  watch: {
+    timeframe: function (update) {
+      if (update == "week") {
+        this.current = this.object.timeframes.weekly.current;
+        this.previous = this.object.timeframes.weekly.previous;
+      }
+      if (update == "day") {
+        this.current = this.object.timeframes.daily.current;
+        this.previous = this.object.timeframes.daily.previous;
+      }
+      if (update == "month") {
+        this.current = this.object.timeframes.monthly.current;
+        this.previous = this.object.timeframes.monthly.previous;
+      }
+    },
+  },
+
+  methods: {
+    parse(title) {
+      title = title.toLowerCase();
+      title = title.replace(" ", "-");
+      return title;
+    },
+    getBackground(title) {
+      title = title.toLowerCase();
+      title = title.replaceAll(" ", "");
+      return title;
+    },
   },
 };
 </script>
@@ -47,6 +89,7 @@ export default {
   display: flex;
   flex-direction: row-reverse;
   overflow: hidden;
+  height: 70px;
 }
 .header > img {
   margin-top: -10px;

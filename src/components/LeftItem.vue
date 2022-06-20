@@ -6,15 +6,61 @@
       <div class="user-name">Jeremy Robson</div>
     </div>
     <div class="lower-card">
-      <div id="daily">Daily</div>
-      <div id="weekly">Weekly</div>
-      <div id="monthly">Monthly</div>
+      <div id="daily" class="option" :class="day" @click="toggleOption('day')">
+        Daily
+      </div>
+      <div
+        id="weekly"
+        class="option"
+        :class="week"
+        @click="toggleOption('week')"
+      >
+        Weekly
+      </div>
+      <div
+        id="monthly"
+        class="option"
+        :class="month"
+        @click="toggleOption('month')"
+      >
+        Monthly
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      timeframe: "week",
+      day: "",
+      week: "active",
+      month: "",
+    };
+  },
+  methods: {
+    toggleOption(option) {
+      this.timeframe = option;
+      this.$emit("timeframe", this.timeframe);
+      if (option == "day") {
+        this.day = "active";
+        this.week = "";
+        this.month = "";
+      }
+      if (option == "week") {
+        this.week = "active";
+        this.month = "";
+        this.day = "";
+      }
+      if (option == "month") {
+        this.month = "active";
+        this.week = "";
+        this.day = "";
+      }
+    },
+  },
+};
 </script>
 
 <style>
@@ -72,10 +118,10 @@ export default {};
   color: var(--PaleBlue);
 }
 
-#daily {
+.option {
   color: var(--PaleBlue);
 }
-#monthly {
-  color: var(--PaleBlue);
+.option + .active {
+  color: white;
 }
 </style>
